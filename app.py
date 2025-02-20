@@ -65,7 +65,7 @@ if st.button('Diabetes Test Result'):
 if st.button('Show Model Accuracy'):
     try:
         # Load test dataset (CSV file)
-        diabetes_dataset = pd.read_csv(r"diabetes_model.sav")  # Corrected file path
+        diabetes_dataset = pd.read_csv(r"diabetes_model.csv")  # Corrected file path
 
         X_test = diabetes_dataset.drop(columns=["Outcome"])  # Features
         y_test = diabetes_dataset["Outcome"]  # Target variable
