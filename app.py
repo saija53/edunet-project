@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score
 
 st.set_page_config(page_title="Diabetes Prediction", layout="wide", page_icon="🧑‍⚕")
 
-d_model_path=r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes_model.sav"
+d_model_path=r"diabetes_model.sav"
 d_model=pickle.load(open(d_model_path,'rb'))
 
 st.title("DP using ML")
@@ -66,7 +66,7 @@ if st.button('Diabetes Test Result'):
 if st.button('Show Model Accuracy'):
     try:
         # Load the dataset (Make sure this file exists!)
-        diabetes_dataset = pd.read_csv(r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes.csv") 
+        diabetes_dataset = pd.read_csv(r"diabetes.csv") 
 
         # Split data into features (X) and target labels (y)
         X_test = diabetes_dataset.drop(columns=["Outcome"])  # Ensure "Outcome" is the correct column name
