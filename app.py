@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score
 st.set_page_config(page_title="Diabetes Prediction", layout="wide", page_icon="🧑‍⚕")
 
 # Load the trained model
-d_model_path = r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes_model.sav"
+d_model_path = r"diabetes_model.sav"
 d_model = pickle.load(open(d_model_path, 'rb'))
 
 st.title("Diabetes Prediction using ML")
@@ -65,7 +65,7 @@ if st.button('Diabetes Test Result'):
 if st.button('Show Model Accuracy'):
     try:
         # Load test dataset (CSV file)
-        diabetes_dataset = pd.read_csv(r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes.csv")  # Corrected file path
+        diabetes_dataset = pd.read_csv(r"diabetes_model.sav")  # Corrected file path
 
         X_test = diabetes_dataset.drop(columns=["Outcome"])  # Features
         y_test = diabetes_dataset["Outcome"]  # Target variable
