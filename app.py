@@ -1,51 +1,53 @@
 import pickle
 import streamlit as st
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+
+
 
 st.set_page_config(page_title="Diabetes Prediction", layout="wide", page_icon="🧑‍⚕")
 
-# Load the trained model
-d_model_path = r"diabetes_model.sav"
-d_model = pickle.load(open(d_model_path, 'rb'))
+d_model_path=r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes_model.sav"
+d_model=pickle.load(open(d_model_path,'rb'))
 
-st.title("Diabetes Prediction using ML")
+st.title("DP using ML")
 
-# Input columns
-col1, col2, col3 = st.columns(3)
+col1,col2,col3=st.columns(3)
 
 with col1:
-    Pregnancies = st.text_input('Number of Pregnancies')
+    Pregnancies=st.text_input('Number of Pregnancies')
 
 with col2:
-    Glucose = st.text_input('Glucose')
+    Glucose=st.text_input('Glucose')
 
 with col3:
-    BloodPressure = st.text_input('Blood Pressure')
+    BloodPressure=st.text_input('Blood Pressure')
 
 with col1:
-    SkinThickness = st.text_input('Skin Thickness')
+    SkinThickness=st.text_input('Skin Thickness')
 
 with col2:
-    Insulin = st.text_input('Insulin Level')
+    Insulin=st.text_input('Insulin Level')
 
 with col3:
-    BMI = st.text_input('BMI Index')
+    BMI=st.text_input('BMI Index')
 
 with col1:
-    Age = st.text_input('Age')
+    Age=st.text_input('Age')
 
 with col2:
-    DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function Level')
+    DiabetesPedigreeFunction=st.text_input('DiabetesPedigreeFunction Level')
 
-diab_diagnosis = ''
+    diab_diagnosis=''
 
-# Prediction button
+
 if st.button('Diabetes Test Result'):
     try:
         # Convert input to float
         user_input = [float(Pregnancies), float(Glucose), float(BloodPressure), float(SkinThickness), 
-                      float(Insulin), float(BMI), float(Age), float(DiabetesPedigreeFunction)]
+                      float(Insulin), float(BMI),float(Age),float(DiabetesPedigreeFunction)]
         
         # Make prediction
         diab_prediction = d_model.predict([user_input])
@@ -61,16 +63,16 @@ if st.button('Diabetes Test Result'):
     except ValueError:
         st.error("Please enter valid numerical values for all fields.")
 
-# Accuracy button
 if st.button('Show Model Accuracy'):
     try:
-        # Load test dataset (CSV file)
-        diabetes_dataset = pd.read_csv(r"diabetes_model.csv")  # Corrected file path
+        # Load the dataset (Make sure this file exists!)
+        diabetes_dataset = pd.read_csv(r"C:\Users\poush\OneDrive\Desktop\proj2\diabetes.csv") 
 
-        X_test = diabetes_dataset.drop(columns=["Outcome"])  # Features
-        y_test = diabetes_dataset["Outcome"]  # Target variable
+        # Split data into features (X) and target labels (y)
+        X_test = diabetes_dataset.drop(columns=["Outcome"])  # Ensure "Outcome" is the correct column name
+        y_test = diabetes_dataset["Outcome"]
 
-        # Make predictions
+        # Make predictions using the trained model
         y_pred = d_model.predict(X_test)
 
         # Calculate accuracy
@@ -78,11 +80,10 @@ if st.button('Show Model Accuracy'):
         st.write(f"Model Accuracy: {accuracy*100:.2f}%")
 
     except FileNotFoundError:
-        st.error("Test dataset not found. Please check the file path.")
+        st.error("Error: Test dataset file not found! Please check the file path.")
+    
     except Exception as e:
         st.error(f"An error occurred: {e}")
-
-
 
 
 
