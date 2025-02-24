@@ -1,7 +1,5 @@
-numpy
-scikit-learn
-streamlit
-streamlit-option-menu
-pandas
+Numpy
+Pandas
 matplotlib
 seaborn
+scikit-learn
